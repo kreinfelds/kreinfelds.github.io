@@ -1,0 +1,131 @@
+---
+layout: post
+title: ".NET Find deleted users in Active Directory"
+date: 2017-02-18 20:44
+background: '/img/posts/01.jpg'
+---
+<h2>How to find deleted users?</h2>
+<p>To find deleted Active Directory objects, you need to use attribute <em>isDeleted</em> and filter only <em>true </em>values. And to filter only user objects, you need to use this LDAP filter - <em>(sAMAccountType=805306368).</em></p>
+<pre>[code lang="csharp"]
+using (DirectoryEntry entry = new DirectoryEntry("LDAP://YourADDomain.com"))
+{
+  using (DirectorySearcher searcher = new DirectorySearcher(entry))
+  {
+    searcher.Filter = "(&amp;amp;(sAMAccountType=805306368)(isDeleted=true))";
+    searcher.Tombstone = true;
+    SearchResultCollection users = searcher.FindAll();
+    foreach (SearchResult user in users)
+    {
+      //process deleted user
+    }
+  }
+}
+[/code]</pre>
+<h2>This filter doesn't return any deleted users!?</h2>
+<p>The problem is in the filter when an object gets deleted, then many attributes are deleted from it. So deleted user objects don't have <em>sAMAccountType</em> attribute. We can try to use <em>objectClass </em>attribute. Filter would look like this <em>(&amp;(objectCategory=person)(objectClass=user))</em> according to Microsoft site example.</p>
+<h3>New filter</h3>
+<pre>(&amp;(objectClass=user)(objectClass=person)(isDeleted=true))</pre>
+<p>After testing this new filter, I found out that computer objects are too in this list. According to Microsoft site, possible objectClass combinations are:</p>
+<table border="1" width="699" frame="box" cellspacing="2" cellpadding="1">
+<tbody>
+<tr>
+<td><strong>objectCategory</strong></td>
+<td><strong>objectClass</strong></td>
+<td><strong>Result</strong></td>
+</tr>
+<tr>
+<td>person</td>
+<td>user</td>
+<td>user objects</td>
+</tr>
+<tr>
+<td>person</td>
+<td> </td>
+<td>user and contact objects</td>
+</tr>
+<tr>
+<td>person</td>
+<td>contact</td>
+<td>contact objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>user</td>
+<td>user and computer objects</td>
+</tr>
+<tr>
+<td>computer</td>
+<td> </td>
+<td>computer objects</td>
+</tr>
+<tr>
+<td>user</td>
+<td> </td>
+<td>user and contact objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>contact</td>
+<td>contact objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>computer</td>
+<td>computer objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>person</td>
+<td>user, computer, and contact objects</td>
+</tr>
+<tr>
+<td>contact</td>
+<td> </td>
+<td>user and contact objects</td>
+</tr>
+<tr>
+<td>group</td>
+<td> </td>
+<td>group objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>group</td>
+<td>group objects</td>
+</tr>
+<tr>
+<td>person</td>
+<td>organizationalPerson</td>
+<td>user and contact objects</td>
+</tr>
+<tr>
+<td> </td>
+<td>organizationalPerson</td>
+<td>user, computer, and contact objects</td>
+</tr>
+<tr>
+<td>organizationalPerson</td>
+<td> </td>
+<td>user and contact objects</td>
+</tr>
+</tbody>
+</table>
+<h2>Final version</h2>
+<p>This is the final working version, that returns all deleted user objects.</p>
+<pre>[code lang="csharp"]
+using (DirectoryEntry entry = new DirectoryEntry("LDAP://YourADDomain.com"))
+{
+  using (DirectorySearcher searcher = new DirectorySearcher(entry))
+  {
+    searcher.Filter = "(&amp;amp;(objectClass=user)(objectClass=person)(!(objectClass=computer))(isDeleted=true))";
+    searcher.Tombstone = true;
+    SearchResultCollection users = searcher.FindAll();
+    foreach (SearchResult user in users)
+    {
+      //process deleted user
+    }
+  }
+}
+[/code]</pre>
+<h2>References</h2>
+<p><a href="https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx">https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx</a></p>
