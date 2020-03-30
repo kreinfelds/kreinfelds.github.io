@@ -23,6 +23,13 @@ layout: default
     </div>
   </header>
 
+  {% if page.url contains 'car-prices' %}
+  <div class="container-fluid">
+
+    {{ content }}
+
+  </div>
+  {% else %}
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -31,4 +38,5 @@ layout: default
 
       </div>
     </div>
+    {% endif %}
   </div>
