@@ -7,7 +7,7 @@ background: '/img/bg-about.jpg'
 <p>Ideas, historical prices(from <a href="http://www.mobile.de/">mobile.de</a>).</p>
 
 <table id="car-table" class="table table-striped table-bordered small" style="width:100%">
-{% assign firstrow = ite.data.car-prices[0] %}
+{% assign firstrow = site.data.car-prices[0] %}
 <thead>
 <tr>
 {% for item in firstrow %}
