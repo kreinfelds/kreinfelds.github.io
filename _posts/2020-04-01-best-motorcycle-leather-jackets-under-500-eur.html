@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Looking for the best motorcycle leather jacket under 500 EUR"
+date: 2020-04-01 09:13
+background: ''
+table: jacket-table
+---
+<h1>Looking for the best motorcycle leather jacket under 500 EUR</h1>
+<p>My requirements:
+  <ul class="list-unstyled">
+    <li>High quality leather</li>
+    <li>Price under 500 EUR</li>
+    <li>Popular brand</li>
+    <li>Looks great</li>
+    <li>Practical for everyday use</li>
+    <li>Possibility to add leather pants for track days</li>
+    <li>CE Level 2 armors in shoulders, elbows and possibility to add back armor</li>
+  </ul>
+</p>
+
+<table id="jacket-table" class="table table-striped table-bordered small" style="width:100%">
+<thead>
+<tr>
+  <th>Brand</th>
+  <th>Model</th>
+  <th>Where to buy?</th>
+  <th>Price</th>
+  <th>Leather</th>
+  <th>Armors</th>
+  <th>Supports chest armor</th>
+  <th>Internal pockets</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+{% for jacket in site.data.leather-jackets %}
+<tr>
+    <td>{{jacket.brand}}</td>
+    <td>{{jacket.model}}</td>
+    <td>{{jacket.buy}}</td>
+    <td>{{jacket.price}}</td>
+    <td>{{jacket.leather}}</td>
+    <td>{{jacket.armors}}</td>
+    <td>{{jacket.chest}}</td>
+    <td>{{jacket.pockets}}</td>
+    <td>{{jacket.notes}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
