@@ -210,7 +210,8 @@ body {
               //process(false);
 
               db.collection("users").add({
-                  name: nameValue
+                  name: nameValue,
+                  givePresents: "",
               })
               .then((docRef) => {
                   console.log("Document written with ID: ", docRef.id);
@@ -347,7 +348,7 @@ body {
 
         let users = db.collection("users");
         let queryParam = "givePresents";
-        let query = users.where(queryParam, "!=", false);
+        let query = users.where(queryParam, "==", "");
 
         //.where(firebase.firestore.FieldPath.documentId(), '!=', currentUserId)
 
