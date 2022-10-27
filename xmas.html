@@ -62,6 +62,10 @@ body {
   background-color: rgba(255,255,255,0.5);
 }
 
+.present {
+  height:200px
+}
+
     </style>
   </head>
   <body>
@@ -75,7 +79,7 @@ body {
             <p>(To nepieciešams atcerēties, lai veiktu izlozi vēlāk)</p>
           </div>
           <div class="col-sm-12 col-md-4">
-            <input type="text" id="nameInput" placeholder="Klāvs">
+            <input type="text" id="nameInput" placeholder="Žanis">
           </div>
           <div class="col-sm-12 col-md-4">
             <button type="button" class="btn btn-primary btn-lg" id="loginUserBtn">Ienākt</button>
@@ -86,11 +90,11 @@ body {
           <p>Ievadiet savas dāvanas</p>
 
           <div id="presentListDiv">
-            <textarea id="subject1" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <textarea id="present_1" name="presents" placeholder="Šeit apraksti savu dāvanu..." class="present"></textarea>
 
-            <textarea id="subject2" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <textarea id="present_2" name="presents" placeholder="Šeit apraksti savu dāvanu..." class="present"></textarea>
 
-            <textarea id="subject3" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <textarea id="present_3" name="presents" placeholder="Šeit apraksti savu dāvanu..." class="present"></textarea>
           </div>
 
           <div>
@@ -140,6 +144,10 @@ body {
 
       var db = firebase.firestore();
 
+      var presetCount = 3;
+
+      var currentUserId = "";
+
       document.getElementById("loginUserBtn").addEventListener("click", function (event) {
           event.preventDefault();
           loginUser();
@@ -184,6 +192,8 @@ body {
               .then((docRef) => {
                   console.log("Document written with ID: ", docRef.id);
 
+                  currentUserId = docRef.id;
+
                   createPresentForm();
               })
               .catch((error) => {
@@ -196,6 +206,8 @@ body {
               otherClosetFound = true;
               console.log("Found user with the same closet name, count = " + docs.size);
               //TODO: Update
+
+              currentUserId = docs[0].id;
 
               createPresentForm();
 
@@ -231,6 +243,26 @@ body {
       function savePresents() {
         //TODO: Check and save presents in db
         console.log("Saglabāt dāvanas");
+
+        if (!currentUserId)
+        {
+          console.log("Cannot find user ID :(");
+          return;
+        }
+
+        var docRef = admin.firestore()
+          .collection('users')
+          .doc(currentUserId);
+
+        if (docRef) {
+          docRef.set({
+                presets: {
+                  "closet": request.body.closet,
+                  "end_date": trialEndDate
+                }
+              });
+        }
+
         //TODO: Switch to wait windows (if wait)
         document.getElementById("presentsFormDiv").remove();
         var wait = true;
@@ -241,11 +273,14 @@ body {
       }
 
       function addMorePresents() {
+        presetCount++;
+
         document.getElementById("presentListDiv")
 
         var input = document.createElement('textarea');
-        //input.name = 'post';
-        //input.maxLength = 5000;
+        input.className = "present";
+        input.placeholder = "Šeit apraksti savu dāvanu...";
+        input.id = "present_" + presetCount;
         //input.cols = 80;
         //input.rows = 40;
         //input.className = 'myCustomTextarea';
