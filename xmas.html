@@ -244,6 +244,16 @@ body {
         //TODO: Check and save presents in db
         console.log("Saglabāt dāvanas");
 
+        var userPresents = [];
+
+        // Get the textareas inside the div with an id of "target2"
+        let areas = document.querySelectorAll("#presentsFormDiv textarea");
+
+        // Convert the collection into an array and loop over the array
+        Array.prototype.slice.call(areas).forEach(function(area){
+          userErrors.push(area.textContent);
+        });
+
         if (!currentUserId)
         {
           console.log("Cannot find user ID :(");
@@ -256,10 +266,7 @@ body {
 
         if (docRef) {
           docRef.set({
-                presets: {
-                  "closet": request.body.closet,
-                  "end_date": trialEndDate
-                }
+                presets: userPresents
               });
         }
 
