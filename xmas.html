@@ -267,16 +267,22 @@ body {
         if (docRef) {
           docRef.set({
                 presets: userPresents
+              }).
+              then(() => {
+                  console.log("Document successfully written!");
+
+                  //TODO: Switch to wait windows (if wait)
+                  document.getElementById("presentsFormDiv").remove();
+                  var wait = true;
+                  if (wait)
+                  document.getElementById("waitFormDiv").style.display = 'block';
+                  else
+                  document.getElementById("getListFormDiv").style.display = 'block';
+              })
+              .catch((error) => {
+                  console.error("Error writing document: ", error);
               });
         }
-
-        //TODO: Switch to wait windows (if wait)
-        document.getElementById("presentsFormDiv").remove();
-        var wait = true;
-        if (wait)
-        document.getElementById("waitFormDiv").style.display = 'block';
-        else
-        document.getElementById("getListFormDiv").style.display = 'block';
       }
 
       function addMorePresents() {
