@@ -79,11 +79,15 @@ body {
         <div id="presentsFormDiv" class="hidden">
           <p>Ievadiet savas dāvanas</p>
 
-          <textarea id="subject1" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+          <div id="presentListDiv">
+            <textarea id="subject1" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
-          <textarea id="subject2" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <textarea id="subject2" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
-          <textarea id="subject3" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <textarea id="subject3" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+          </div>
+
+          <button type="button" class="btn btn-primary" id="addMorePresentsBtn">Pievienot vēl</button>
 
           <button type="button" class="btn btn-primary" id="savePresentsBtn">Saglabāt</button>
         </div>
@@ -141,6 +145,11 @@ body {
       document.getElementById("getPresentListBtn").addEventListener("click", function (event) {
           event.preventDefault();
           getPresentList();
+      })
+
+      document.getElementById("addMorePresentsBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          addMorePresents();
       })
 
       function loginUser() {
@@ -221,6 +230,23 @@ body {
         document.getElementById("waitFormDiv").style.display = 'block';
         else
         document.getElementById("getListFormDiv").style.display = 'block';
+      }
+
+      function addMorePresents() {
+        document.getElementById("presentListDiv")
+
+        var input = document.createElement('textarea');
+        //input.name = 'post';
+        //input.maxLength = 5000;
+        //input.cols = 80;
+        //input.rows = 40;
+        //input.className = 'myCustomTextarea';
+        //var button = document.createElement('button');
+        //var oBody = document.getElementById("body");
+        //while (oBody.childNodes.length > 0) {
+        //    oBody.removeChild(oBody.childNodes[0]);
+        //}
+        document.getElementById("presentListDiv").appendChild(input);
       }
 
       function getPresentList() {
