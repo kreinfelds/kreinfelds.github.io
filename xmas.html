@@ -345,15 +345,61 @@ body {
 
         //Get random user from collection - exclude self and taken lists
 
-        db.collection("users").get().then(function(querySnapshot) {
+        let users = db.collection("users");
+        let queryParam = "givePresents";
+        let query = users.where(queryParam, "!=", false).where(firebase.firestore.FieldPath.documentId(), '==', currentUserId)
+
+        query.get().then(function(querySnapshot) {
 
           console.log("Size total = " + querySnapshot.size);
 
-            querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
+          var total = querySnapshot.size;
+
+          var randomWinner = Math.floor(Math.random()*total);
+
+          console.log("Winner = " + randomWinner);
+
+          //findWinner(querySnapshot, randomWinner);
+
+          querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              //if (doc.id != currentUserId && randomWinner == counter) {
                 console.log(doc.id, " => ", doc.data());
-            });
+              //  found = true;
+              //  foundId = doc.id;
+              //}
+
+              //if (found)
+              //  return;
+            //  counter++;
+          });
+
+            /*if (!found) {
+
+            }*/
+
         });
+
+        function findWinner(querySnapshot, randomWinner) {
+          var counter = 1;
+          var found = false;
+          var foundId = "";
+
+          querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              if (doc.id != currentUserId && randomWinner == counter) {
+                console.log(doc.id, " => ", doc.data());
+                found = true;
+                foundId = doc.id;
+              }
+
+              if (found)
+                return;
+              counter++;
+          });
+
+          return foundId;
+        }
 
         //write user that his presents have got
       }
