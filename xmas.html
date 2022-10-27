@@ -270,7 +270,7 @@ body {
         if (docRef) {
           docRef.set({
                 presets: userPresents
-              }).
+              }, { merge: true }).
               then(() => {
                   console.log("Document successfully written!");
 
