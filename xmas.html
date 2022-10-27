@@ -188,6 +188,12 @@ background-repeat: no-repeat; /* Do not repeat the image */
         //TODO: Check and save presents in db
         console.log("Saglabāt dāvanas");
         //TODO: Switch to wait windows (if wait)
+        document.getElementById("presentsFormDiv").remove();
+        var wait = true;
+        if (wait)
+        document.getElementById("waitFormDiv").style.display = 'block';
+        else
+        document.getElementById("getListFormDiv").style.display = 'block';
       }
 
       function getPresentList() {
