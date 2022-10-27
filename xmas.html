@@ -212,7 +212,9 @@ body {
 
               currentUserId = docs[0].id;
 
-              createPresentForm();
+              document.getElementById("loginFormDiv").remove();
+
+              showWaitForm();
 
               //process(true);
               //return false;
@@ -276,11 +278,7 @@ body {
 
                   //TODO: Switch to wait windows (if wait)
                   document.getElementById("presentsFormDiv").remove();
-                  var wait = true;
-                  if (wait)
-                  document.getElementById("waitFormDiv").style.display = 'block';
-                  else
-                  document.getElementById("getListFormDiv").style.display = 'block';
+                  showWaitForm();
               })
               .catch((error) => {
                   console.error("Error writing document: ", error);
@@ -307,6 +305,14 @@ body {
         //}
         document.getElementById("presentListDiv").appendChild(input);
         input.focus();
+      }
+
+      function showWaitForm() {
+        var wait = true;
+        if (wait)
+        document.getElementById("waitFormDiv").style.display = 'block';
+        else
+        document.getElementById("getListFormDiv").style.display = 'block';
       }
 
       function getPresentList() {
