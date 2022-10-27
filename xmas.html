@@ -341,10 +341,20 @@ body {
 
       function getPresentList() {
         //TODO: Check and save presents in db
-        console.log("Izlozēt dāvanu sarakstu un pārādīt");
+        console.log("Izlozēt dāvanu sarakstu un parādīt");
 
         //Get random user from collection - exclude self and taken lists
-        //
+
+        db.collection("users").get().then(function(querySnapshot) {
+
+          console.log("Size total = " + querySnapshot.size);
+
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+        });
+
         //write user that his presents have got
       }
     </script>
