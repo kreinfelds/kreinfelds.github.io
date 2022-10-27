@@ -35,7 +35,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
     <body class="main-bg">
         <div class="d-flex align-items-center justify-content-center vh-100">
             <div class="shadow p-4">
-                <h5>Bootstrap 5 Div Center</h5>
+                <h5>Ievadiet savu vārdu: </h5>
                 <input type="text" id="nameInput" placeholder="Klāvs">
                 <button class="w-100 btn btn-lg btn-primary" id="loginUserBtn">Sign in</button>
             </div>
@@ -86,7 +86,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 
         query.get()
         .then(docs => {
-            console.log("Query complete for "+ queryParam +" == " + request.body.closet);
+            console.log("Query complete for "+ queryParam +" == " + nameValue);
             if (docs.empty) {
               //Good
               console.log("No closet found");
