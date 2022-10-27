@@ -52,7 +52,7 @@ permalink: /xmas/
                   <input type="checkbox" value="remember-me"> Remember me
                 </label>
               </div>
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+              <button class="w-100 btn btn-lg btn-primary" id="loginUserBtn">Sign in</button>
               <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
             </form>
 
@@ -74,5 +74,46 @@ permalink: /xmas/
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCcs8aOUr0WAJkS3PN7OpLh2G8g6CIffLg",
+        authDomain: "xmas-9954f.firebaseapp.com",
+        projectId: "xmas-9954f",
+        storageBucket: "xmas-9954f.appspot.com",
+        messagingSenderId: "386440200547",
+        appId: "1:386440200547:web:7afca65b0a7f48de279356"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
+
+    <script>
+
+      document.getElementById("loginUserBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          loginUser();
+      })
+
+      function loginUser() {
+        firebase.auth().signInAnonymously()
+        .then(() => {
+          // Signed in..
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+    </script>
+
   </body>
 </html>
