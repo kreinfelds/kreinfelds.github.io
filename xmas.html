@@ -106,11 +106,12 @@ permalink: /xmas/
         firebase.auth().signInAnonymously()
         .then(() => {
           // Signed in..
+          console.log("Signed in! Good!");
         })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-          // ...
+          console.log("Error: bad" + errorCode + errorMessage);
         });
       }
     </script>
