@@ -75,7 +75,33 @@ permalink: /xmas/
 
         var nameValue = document.getElementById("nameInput").value;
 
-        db.collection("users").add({
+        //find or create new
+
+        let users = db.collection("users");
+        let queryParam = "name";
+        let query = users.where(queryParam, "==", nameValue);
+
+        query.get()
+        .then(docs => {
+            console.log("Query complete for "+ queryParam +" == " + request.body.closet);
+            if (docs.empty) {
+              //Good
+              console.log("No closet found");
+              process(false);
+              return true;
+            } else {
+              //Bad
+              otherClosetFound = true;
+              console.log("Found user with the same closet name, count = " + docs.size);
+              process(true);
+              return false;
+            }
+          })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
+
+        /*db.collection("users").add({
             name: nameValue
         })
         .then((docRef) => {
@@ -83,7 +109,7 @@ permalink: /xmas/
         })
         .catch((error) => {
             console.error("Error adding document: ", error);
-        });
+        });*/
       }
     </script>
 
