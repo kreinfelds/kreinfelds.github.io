@@ -271,6 +271,9 @@ body {
         //TODO: Check and save presents in db
         console.log("Saglabāt dāvanas");
 
+        var yourColor = document.getElementById("colorInput").value;
+        var yourTaste = document.getElementById("tasteInput").value;
+
         var userPresents = [];
 
         // Get the textareas inside the div with an id of "target2"
@@ -293,6 +296,8 @@ body {
 
         if (docRef) {
           docRef.set({
+            color: yourColor,
+            taste: yourTaste,
                 presets: userPresents
               }, { merge: true }).
               then(() => {
