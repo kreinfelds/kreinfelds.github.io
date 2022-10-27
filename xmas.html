@@ -32,14 +32,22 @@ background-repeat: no-repeat; /* Do not repeat the image */
   .hidden {
     display: none;
   }
+
+  input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
     </style>
   </head>
   <body>
 
     <body class="main-bg">
-      <div class="container text-center">
+      <div class="container text-center vh-100">
 
-        <div id="loginFormDiv" class="row">
+        <div id="loginFormDiv" class="row g-3">
           <div class="col-sm-12 col-md-4">
             <h5>Ievadiet savu vārdu</h5>
           </div>
@@ -47,16 +55,20 @@ background-repeat: no-repeat; /* Do not repeat the image */
             <input type="text" id="nameInput" placeholder="Klāvs">
           </div>
           <div class="col-sm-12 col-md-4">
-            <button class="w-100 btn btn-lg btn-primary" id="loginUserBtn">Ienākt</button>
+            <button type="button" class="btn btn-primary" id="loginUserBtn">Ienākt</button>
           </div>
         </div>
 
         <div id="presentsFormDiv" class="hidden">
           <p>Ievadiet savas dāvanas</p>
 
-          <input type="text" name="" value="">
+          <textarea id="subject1" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
-          <button id="savePresentsBtn">Saglabāt</button>
+          <textarea id="subject2" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+          <textarea id="subject3" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+          <button type="button" class="btn btn-primary" id="savePresentsBtn">Saglabāt</button>
         </div>
 
         <div id="waitFormDiv" class="hidden">
@@ -66,7 +78,7 @@ background-repeat: no-repeat; /* Do not repeat the image */
         <div id="getListFormDiv" class="hidden">
           <p>Tavas dāvanas ir saglabātas, gaidām citus</p>
 
-          <button id="getPresentListBtn">Atratst kam dāvināt</button>
+          <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
 
       </div>
