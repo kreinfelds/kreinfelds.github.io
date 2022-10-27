@@ -254,7 +254,7 @@ body {
 
         // Convert the collection into an array and loop over the array
         Array.prototype.slice.call(areas).forEach(function(area){
-          userPresents.push(area.textContent);
+          userPresents.push(area.value);
         });
 
         if (!currentUserId)
