@@ -250,7 +250,7 @@ body {
           return;
         }
 
-        var docRef = admin.firestore()
+        var docRef = db
           .collection('users')
           .doc(currentUserId);
 
