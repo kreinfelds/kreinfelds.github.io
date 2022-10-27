@@ -40,22 +40,35 @@ background-repeat: no-repeat; /* Do not repeat the image */
       <div class="main-bg">
 
         <div id="loginFormDiv" class="d-flex align-items-center justify-content-center vh-100">
-            <div class="row g-3 align-items-center">
-              <div class="col-auto">
-                <h5>Ievadiet savu vārdu: </h5>
-              </div>
-              <div class="col-auto">
-                <input type="text" id="nameInput" placeholder="Klāvs">
-              </div>
-              <div class="col-auto">
-                <button class="w-100 btn btn-lg btn-primary" id="loginUserBtn">Ienākt</button>
-              </div>
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <h5>Ievadiet savu vārdu: </h5>
             </div>
-
+            <div class="col-auto">
+              <input type="text" id="nameInput" placeholder="Klāvs">
+            </div>
+            <div class="col-auto">
+              <button class="w-100 btn btn-lg btn-primary" id="loginUserBtn">Ienākt</button>
+            </div>
           </div>
+        </div>
 
         <div id="presentsFormDiv" class="hidden">
           <p>Ievadiet savas dāvanas</p>
+
+          <input type="text" name="" value="">
+
+          <button id="savePresentsBtn">Saglabāt</button>
+        </div>
+
+        <div id="waitFormDiv" class="hidden">
+          <p>Tavas dāvanas ir saglabātas, gaidām citus</p>
+        </div>
+
+        <div id="getListFormDiv" class="hidden">
+          <p>Tavas dāvanas ir saglabātas, gaidām citus</p>
+
+          <button id="getPresentListBtn">Atratst kam dāvināt</button>
         </div>
 
       </div>
@@ -91,6 +104,16 @@ background-repeat: no-repeat; /* Do not repeat the image */
       document.getElementById("loginUserBtn").addEventListener("click", function (event) {
           event.preventDefault();
           loginUser();
+      })
+
+      document.getElementById("savePresentsBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          savePresents();
+      })
+
+      document.getElementById("getPresentListBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          getPresentList();
       })
 
       function loginUser() {
@@ -159,6 +182,17 @@ background-repeat: no-repeat; /* Do not repeat the image */
         document.getElementById("loginFormDiv").remove();
 
         document.getElementById("presentsFormDiv").style.display = 'block';
+      }
+
+      function savePresents() {
+        //TODO: Check and save presents in db
+        console.log("Saglabāt dāvanas");
+        //TODO: Switch to wait windows (if wait)
+      }
+
+      function getPresentList() {
+        //TODO: Check and save presents in db
+        console.log("Izlozēt dāvanu sarakstu un pārādīt");
       }
     </script>
 
