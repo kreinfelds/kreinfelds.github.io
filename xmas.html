@@ -347,7 +347,7 @@ body {
 
         let users = db.collection("users");
         let queryParam = "givePresents";
-        let query = users..orderBy('givePresents').where(queryParam, "!=", false).where(firebase.firestore.FieldPath.documentId(), '==', currentUserId)
+        let query = users..orderBy('givePresents').where(queryParam, "!=", false).where(firebase.firestore.FieldPath.documentId(), '!=', currentUserId)
 
         query.get().then(function(querySnapshot) {
 
