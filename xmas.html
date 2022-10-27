@@ -153,6 +153,8 @@ body {
 
       var currentUserId = "";
 
+      var wait = false;
+
       document.getElementById("loginUserBtn").addEventListener("click", function (event) {
           event.preventDefault();
           loginUser();
@@ -310,11 +312,10 @@ body {
       }
 
       function showWaitForm() {
-        var wait = true;
         if (wait)
-        document.getElementById("waitFormDiv").style.display = 'block';
+          document.getElementById("waitFormDiv").style.display = 'block';
         else
-        document.getElementById("getListFormDiv").style.display = 'block';
+          document.getElementById("getListFormDiv").style.display = 'block';
       }
 
       function getPresentList() {
