@@ -114,7 +114,7 @@ body {
         </div>
 
         <div id="getListFormDiv" class="hidden text-white">
-          <p>Tavas dāvanas ir saglabātas, gaidām citus</p>
+          <h1>Visi dalībnieki ir gatavi, varam sākti izlozi :)</h1>
 
           <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
@@ -321,6 +321,9 @@ body {
       function getPresentList() {
         //TODO: Check and save presents in db
         console.log("Izlozēt dāvanu sarakstu un pārādīt");
+
+        //Get random user from collection - exclude self and taken lists
+        //write user that his presents have got
       }
     </script>
 
