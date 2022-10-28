@@ -213,7 +213,7 @@ body {
 
         let users = db.collection("users");
         let queryParam = "name";
-        let query = users.where(queryParam, "==", nameValue);
+        let query = users.where(queryParam, "==", nameValue.toLowerCase());
 
         query.get()
         .then(docs => {
@@ -224,7 +224,7 @@ body {
               //process(false);
 
               db.collection("users").add({
-                  name: nameValue,
+                  name: nameValue.toLowerCase(),
                   givePresents: "",
               })
               .then((docRef) => {
