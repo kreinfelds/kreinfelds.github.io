@@ -263,9 +263,14 @@ body {
 
                 query.get()
                 .then(docs => {
-                    console.log("Query complete for "+ queryParam +" == " + nameValue);
+                    console.log("Query complete for "+ queryParam +" == " + pinValue);
                     if (docs.empty) {
                       //error - invalid pin
+                      var par = document.createElement('p');
+                      par.className = "fs-3 text-danger fw-bold";
+                      par.textContent  = "Nepareizs PIN!";
+                      document.getElementById("loginFormDiv").appendChild(par);
+
                       console.log("Nepareizs PIN");
                     } else {
                       //Bad
