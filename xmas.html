@@ -296,6 +296,24 @@ body {
         var yourColor = document.getElementById("colorInput").value;
         var yourTaste = document.getElementById("tasteInput").value;
 
+        if (yourColor.length < 1) {
+          var par = document.createElement('p');
+          par.className = "fs-3 text-danger fw-bold";
+          par.textContent  = "Lūdzu norādi savu krāsu, ja nevari izdomāt, tad ņem Sarkanu!";
+          document.getElementById("savePresentsDiv").appendChild(par);
+
+          return;
+        }
+
+        if (yourTaste.length < 1) {
+          var par = document.createElement('p');
+          par.className = "fs-3 text-danger fw-bold";
+          par.textContent  = "Lūdzu norādi savu krāsu, ja nevari izdomāt, tad raksti Piparkūku!";
+          document.getElementById("savePresentsDiv").appendChild(par);
+
+          return;
+        }
+
         var userPresents = [];
 
         // Get the textareas inside the div with an id of "target2"
