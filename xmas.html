@@ -470,13 +470,13 @@ body {
             document.getElementById("showPresentsDiv").style.display = 'block';
 
             if (data) {
-              var par = document.createElement('p');
-              par.textContent  = "Krāsa: " + data.color ? data.color : "Nav norādīts :(";
-              document.getElementById("winnerPresentListDiv").appendChild(par);
+              var par1 = document.createElement('p');
+              par1.textContent  = "Krāsa: " + (data.color ? data.color : "Nav norādīts :(");
+              document.getElementById("winnerPresentListDiv").appendChild(par1);
 
-              var par = document.createElement('p');
-              par.textContent  = "Garša: " + data.taste ? data.taste : "Nav norādīts :(";
-              document.getElementById("winnerPresentListDiv").appendChild(par);
+              var par2 = document.createElement('p');
+              par2.textContent  = "Garša: " + (data.taste ? data.taste : "Nav norādīts :(");
+              document.getElementById("winnerPresentListDiv").appendChild(par2);
 
               data.presents.forEach(myFunction);
             }
