@@ -176,6 +176,8 @@ body {
 
       var wait = false;
 
+      var maxUsers = 7;
+
       document.getElementById("loginUserBtn").addEventListener("click", function (event) {
           event.preventDefault();
           loginUser();
@@ -415,6 +417,13 @@ body {
           console.log("Size total = " + querySnapshot.size);
 
           var total = querySnapshot.size;
+
+          if (total > maxUsers) {
+            var par = document.createElement('p');
+            par.className = "fs-3 text-danger fw-bold";
+            par.textContent  = "Sistēmas kļūda, pārāk daudz reģistrētu lietotāju, bija paredzēts " + maxUsers;
+            document.getElementById("getListFormDiv").appendChild(par);
+          }
 
           //TODO: no good
           //var randomWinner = Math.floor(Math.random()*total);
