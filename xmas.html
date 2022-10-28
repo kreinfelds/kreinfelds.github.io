@@ -257,7 +257,7 @@ body {
 
         //find or create new
         let users = db.collection("users");
-        let queryParam = "name";
+        let queryParam = "pinCode";
         let query = users.where(queryParam, "==", parseInt(pinValue));
 
 
