@@ -345,7 +345,7 @@ body {
         document.getElementById("presentsFormDiv").style.display = 'block';
       }
 
-      function savePresents() {
+      async function savePresents() {
         //TODO: Check and save presents in db
         console.log("Saglabāt dāvanas");
 
@@ -401,7 +401,7 @@ body {
         let newPin = 0;
 
         do {
-          newPin = generateNewPin();
+          newPin = await generateNewPin();
           console.log("newPin = " + newPin);
         } while (!newPin);
 
