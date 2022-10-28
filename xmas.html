@@ -150,7 +150,7 @@ body {
         </div>
 
         <div id="getListFormDiv" class="hidden text-white">
-          <h2 class="hidden">Visi dalībnieki ir gatavi, varam sākti izlozi :)</h2>
+          <h2 id="readyTitle" class="hidden">Visi dalībnieki ir gatavi, varam sākti izlozi :)</h2>
 
           <div id="oldPinDiv" class="hidden">
             <h4>Tavs PIN kods, kuru izmantot dāvanu izlozē:</h4>
@@ -556,6 +556,10 @@ body {
             //pinDiv
             document.getElementById("oldPinDiv").style.display = 'block';
             document.getElementById("oldPinValue").textContent = yourPin;
+          } else {
+            //showWaitForm
+            document.getElementById("readyTitle").classList.remove("hidden");
+            document.getElementById("getPresentListBtn").classList.remove("hidden");
           }
         }
       }
