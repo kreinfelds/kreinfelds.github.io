@@ -315,7 +315,7 @@ body {
 
         if (userPresents.length < 3) {
           var par = document.createElement('p');
-          par.className = "text-red";
+          par.className = "fs-3 text-danger fw-bold";
           par.textContent  = "Vajag vismaz 3 dāvanas! Padomā vēl!";
           document.getElementById("savePresentsDiv").appendChild(par);
 
@@ -487,7 +487,7 @@ body {
             // Note - error messages will vary depending on browser
 
             var par = document.createElement('p');
-            par.className = "text-red";
+            par.className = "fs-3 text-danger fw-bold";
             par.textContent  = "ĶĻŪDA: " + error;
             document.getElementById("winnerPresentListDiv").appendChild(par);
           }
