@@ -135,6 +135,11 @@ body {
           <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
 
+        <div id="showPresentsDiv" class="hidden text-white">
+          <div id="winnerPresentListDiv">
+          </div>
+        </div>
+
       </div>
     </body>
 
@@ -235,7 +240,25 @@ body {
 
               document.getElementById("loginFormDiv").remove();
 
-              showWaitForm();
+              //Find if have winner
+              let users = db.collection("users");
+              let queryParam = "givePresents";
+              let query = users.where(queryParam, "==", currentUserId);
+              query.get().then(function(querySnapshot) {
+                if (querySnapshot.empty) {
+                  showWaitForm();
+                }
+                else {
+                  querySnapshot.forEach(function(doc) {
+
+                    console.log("Winner found, todo: show present list");
+                    var winnerData = doc.data();
+
+                    showWinnerPresents(winnerData);
+                  });
+                }
+              });
+
 
               //process(true);
               //return false;
@@ -412,6 +435,8 @@ body {
                     var winnerDocument = doc.data();
 
                     console.log("winnerDocument = ", winnerDocument);
+
+                    showWinnerPresents(winnerDocument);
                   }
                 })
                 .catch((error) => {
@@ -421,25 +446,29 @@ body {
 
         });
 
-        function findWinner(querySnapshot, randomWinner) {
-          var counter = 1;
-          var found = false;
-          var foundId = "";
+        function showWinnerPresents(data) {
 
-          querySnapshot.forEach(function(doc) {
-              // doc.data() is never undefined for query doc snapshots
-              if (doc.id != currentUserId && randomWinner == counter) {
-                console.log(doc.id, " => ", doc.data());
-                found = true;
-                foundId = doc.id;
-              }
+          function myFunction(value, index, array) {
+            var par = document.createElement('p');
+            par.textContent  = "Dāvana" + (index + 1) + ": " + value;
+            document.getElementById("winnerPresentListDiv").appendChild(par);
+          }
 
-              if (found)
-                return;
-              counter++;
-          });
+          document.getElementById("getListFormDiv").remove();
 
-          return foundId;
+          document.getElementById("showPresentsDiv").style.display = 'block';
+
+          if (data) {
+            var par = document.createElement('p');
+            par.textContent  = "Krāsa: " + data.color;
+            document.getElementById("winnerPresentListDiv").appendChild(par);
+
+            var par = document.createElement('p');
+            par.textContent  = "Garša: " + data.taste;
+            document.getElementById("winnerPresentListDiv").appendChild(par);
+
+            data.presents.forEach(myFunction);
+          }
         }
 
         //write user that his presents have got
