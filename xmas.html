@@ -244,6 +244,68 @@ body {
 
       function loginUser() {
         console.log("Check PIN and show wait/lottery");
+
+        var pinValue = document.getElementById("nameInput").value;
+
+        if (pinValue.length < 1) {
+          var par = document.createElement('p');
+          par.className = "fs-3 text-danger fw-bold";
+          par.textContent  = "ĶĻŪDA: Ievadiet vārdu!";
+          document.getElementById("loginFormDiv").appendChild(par);
+          return;
+        }
+
+        //find or create new
+        let users = db.collection("users");
+        let queryParam = "name";
+        let query = users.where(queryParam, "==", pinValue);
+
+
+                query.get()
+                .then(docs => {
+                    console.log("Query complete for "+ queryParam +" == " + nameValue);
+                    if (docs.empty) {
+                      //error - invalid pin
+                      console.log("Nepareizs PIN");
+                    } else {
+                      //Bad
+                      otherClosetFound = true;
+                      console.log("Found user with the same closet name, count = " + docs.size);
+                      //TODO: Update
+
+                      currentUserId = docs.docs[0].id;
+
+                      document.getElementById("loginFormDiv").remove();
+
+                      //Find if have winner
+                      let users = db.collection("users");
+                      let queryParam = "givePresents";
+                      let query = users.where(queryParam, "==", currentUserId);
+                      query.get().then(function(querySnapshot) {
+                        if (querySnapshot.empty) {
+                          showWaitForm();
+                        }
+                        else {
+                          querySnapshot.forEach(function(doc) {
+
+                            console.log("Winner found, todo: show present list");
+                            var winnerData = doc.data();
+
+                            showWinnerPresents(winnerData);
+                          });
+                        }
+                      });
+
+
+                      //process(true);
+                      //return false;
+                    }
+                  })
+                .catch(error => {
+                  console.error("Error adding document: ", error);
+                });
+
+        //currentUserId = docRef.id;
       }
 
       function loginUserOld() {
@@ -413,8 +475,10 @@ body {
           color: yourColor,
           taste: yourTaste,
           presents: userPresents
-        }).then(() => {
+        }).then((docRef) => {
           console.log("Document successfully written!");
+
+          currentUserId = docRef.id;
 
           document.getElementById("presentsFormDiv").remove();
           showWaitForm(newPin);
@@ -470,10 +534,12 @@ body {
 
         if (wait) {
           document.getElementById("waitFormDiv").style.display = 'block';
+          if (yourPin)
           document.getElementById("pinValue").textContent = yourPin;
         }
         else {
           document.getElementById("getListFormDiv").style.display = 'block';
+          if (yourPin)
           document.getElementById("oldPinValue").textContent = yourPin;
         }
       }
