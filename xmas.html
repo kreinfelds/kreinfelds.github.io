@@ -74,7 +74,7 @@ body {
     <body class="main-bg bg-dark text-center">
       <div class="container form-signin">
 
-        <div id="loginFormDiv" class="row g-3 tran p-3">
+        <div id="newFormDiv" class="row g-3 tran p-3">
           <div class="col-sm-12 col-md-4">
             <button type="button" class="btn btn-primary btn-lg" id="newUserBtn">Iesniegt dāvanu sarakstu</button>
           </div>
@@ -215,6 +215,26 @@ body {
           event.preventDefault();
           addMorePresents();
       })
+
+      document.getElementById("newUserBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          showNewUser();
+      })
+
+      document.getElementById("lotteryBtn").addEventListener("click", function (event) {
+          event.preventDefault();
+          showLottery();
+      })
+
+      function showNewUser() {
+        document.getElementById("newFormDiv").remove();
+        document.getElementById("loginFormDiv").style.display = 'block';
+      }
+
+      function showLottery() {
+        document.getElementById("newFormDiv").remove();
+        document.getElementById("getListFormDiv").style.display = 'block';
+      }
 
       function loginUser() {
 
