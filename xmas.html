@@ -423,7 +423,7 @@ body {
 
       }
 
-      function generateNewPin() {
+      async function generateNewPin() {
         var yourPin = Math.floor(Math.random()*(999-100+1)+100);
 
         let users = db.collection("users");
