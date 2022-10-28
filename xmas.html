@@ -358,16 +358,25 @@ body {
 
           var total = querySnapshot.size;
 
-          var randomWinner = Math.floor(Math.random()*total);
+          //TODO: no good
+          //var randomWinner = Math.floor(Math.random()*total);
 
-          console.log("Winner = " + randomWinner);
+          //create array of avaiable and then radndom from them
+
+          //console.log("Winner = " + randomWinner);
 
           //findWinner(querySnapshot, randomWinner);
+
+          var usersToGive = [];
 
           querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
               //if (doc.id != currentUserId && randomWinner == counter) {
                 console.log(doc.id, " => ", doc.data());
+
+                if (doc.id != currentUserId)
+                  usersToGive.push(doc.id);
+
               //  found = true;
               //  foundId = doc.id;
               //}
@@ -377,9 +386,38 @@ body {
             //  counter++;
           });
 
-            /*if (!found) {
+          var winnerId = usersToGive[Math.floor(Math.random()*usersToGive.length)];
 
-            }*/
+          console.log("Winner " + winnerId);
+
+          //todo: update winner
+
+          var docRef = db
+            .collection('users')
+            .doc(winnerId);
+
+          if (docRef) {
+            docRef.set({
+              givePresents: currentUserId
+                }, { merge: true }).
+                then(() => {
+                    console.log("Document successfully written!");
+                    return docRef.get();
+                    //TODO: Show presents
+
+                }).then(doc => {
+                  if (!doc.exists) {
+                    console.log("No such document!"); //Error
+                  } else {
+                    var winnerDocument = doc.data();
+
+                    console.log("winnerDocument = ", winnerDocument);
+                  }
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+          }
 
         });
 
