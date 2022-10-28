@@ -474,44 +474,44 @@ body {
 
         });
 
-        function showWinnerPresents(data) {
-          try
-          {
-            function myFunction(value, index, array) {
-              var par = document.createElement('p');
-              par.textContent  = "Dāvana" + (index + 1) + ": " + value;
-              document.getElementById("winnerPresentListDiv").appendChild(par);
-            }
+        //write user that his presents have got
+      }
 
-            document.getElementById("getListFormDiv").remove();
-
-            document.getElementById("showPresentsDiv").style.display = 'block';
-
-            if (data) {
-              var par1 = document.createElement('p');
-              par1.textContent  = "Krāsa: " + (data.color ? data.color : "Nav norādīts :(");
-              document.getElementById("winnerPresentListDiv").appendChild(par1);
-
-              var par2 = document.createElement('p');
-              par2.textContent  = "Garša: " + (data.taste ? data.taste : "Nav norādīts :(");
-              document.getElementById("winnerPresentListDiv").appendChild(par2);
-
-              data.presents.forEach(myFunction);
-            }
-
-          } catch (error) {
-            console.error(error);
-            // expected output: ReferenceError: nonExistentFunction is not defined
-            // Note - error messages will vary depending on browser
-
+      function showWinnerPresents(data) {
+        try
+        {
+          function myFunction(value, index, array) {
             var par = document.createElement('p');
-            par.className = "fs-3 text-danger fw-bold";
-            par.textContent  = "ĶĻŪDA: " + error;
+            par.textContent  = "Dāvana" + (index + 1) + ": " + value;
             document.getElementById("winnerPresentListDiv").appendChild(par);
           }
-        }
 
-        //write user that his presents have got
+          document.getElementById("getListFormDiv").remove();
+
+          document.getElementById("showPresentsDiv").style.display = 'block';
+
+          if (data) {
+            var par1 = document.createElement('p');
+            par1.textContent  = "Krāsa: " + (data.color ? data.color : "Nav norādīts :(");
+            document.getElementById("winnerPresentListDiv").appendChild(par1);
+
+            var par2 = document.createElement('p');
+            par2.textContent  = "Garša: " + (data.taste ? data.taste : "Nav norādīts :(");
+            document.getElementById("winnerPresentListDiv").appendChild(par2);
+
+            data.presents.forEach(myFunction);
+          }
+
+        } catch (error) {
+          console.error(error);
+          // expected output: ReferenceError: nonExistentFunction is not defined
+          // Note - error messages will vary depending on browser
+
+          var par = document.createElement('p');
+          par.className = "fs-3 text-danger fw-bold";
+          par.textContent  = "ĶĻŪDA: " + error;
+          document.getElementById("winnerPresentListDiv").appendChild(par);
+        }
       }
     </script>
 
