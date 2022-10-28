@@ -142,8 +142,8 @@ body {
           <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
 
-        <div id="showPresentsDiv" class="hidden text-white">
-          <div id="winnerPresentListDiv">
+        <div id="showPresentsDiv" class="hidden">
+          <div id="winnerPresentListDiv" class="tran">
           </div>
         </div>
 
@@ -505,7 +505,7 @@ body {
         {
           function myFunction(value, index, array) {
             var par = document.createElement('p');
-            par.textContent  = "Dāvana" + (index + 1) + ": " + value;
+            par.textContent  = "Dāvana " + (index + 1) + ": " + value;
             document.getElementById("winnerPresentListDiv").appendChild(par);
           }
 
@@ -515,11 +515,11 @@ body {
 
           if (data) {
             var par1 = document.createElement('p');
-            par1.textContent  = "Krāsa: " + (data.color ? data.color : "Nav norādīts :(");
+            par1.textContent  = "Centies iesaiņot, noformēt dāvanu šādā krāsā: " + (data.color ? data.color : "Nav norādīts :(");
             document.getElementById("winnerPresentListDiv").appendChild(par1);
 
             var par2 = document.createElement('p');
-            par2.textContent  = "Garša: " + (data.taste ? data.taste : "Nav norādīts :(");
+            par2.textContent  = "Atrodi un pievieno kaut ko ar šādu garšu: " + (data.taste ? data.taste : "Nav norādīts :(");
             document.getElementById("winnerPresentListDiv").appendChild(par2);
 
             data.presents.forEach(myFunction);
