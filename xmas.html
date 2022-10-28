@@ -85,11 +85,10 @@ body {
 
         <div id="loginFormDiv" class="hidden row g-3 tran p-3">
           <div class="">
-            <h2>Ievadiet savu vārdu</h2>
-            <p>(To nepieciešams atcerēties, lai veiktu izlozi vēlāk)</p>
+            <h2>Ievadiet savu PIN</h2>
           </div>
           <div class="">
-            <input type="text" id="nameInput" placeholder="vārds">
+            <input type="text" id="nameInput" placeholder="pin kods">
           </div>
           <div class="">
             <button type="button" class="btn btn-primary btn-lg" id="loginUserBtn">Ienākt</button>
@@ -236,11 +235,18 @@ body {
       }
 
       function showLottery() {
+        //TODO: Login with PIN
+        //loginFormDiv
+
         document.getElementById("newFormDiv").remove();
-        document.getElementById("getListFormDiv").style.display = 'block';
+        document.getElementById("loginFormDiv").style.display = 'block';
       }
 
       function loginUser() {
+        console.log("Check PIN and show wait/lottery");
+      }
+
+      function loginUserOld() {
 
         var nameValue = document.getElementById("nameInput").value;
 
