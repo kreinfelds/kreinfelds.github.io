@@ -447,27 +447,38 @@ body {
         });
 
         function showWinnerPresents(data) {
+          try
+          {
+            function myFunction(value, index, array) {
+              var par = document.createElement('p');
+              par.textContent  = "Dāvana" + (index + 1) + ": " + value;
+              document.getElementById("winnerPresentListDiv").appendChild(par);
+            }
 
-          function myFunction(value, index, array) {
+            document.getElementById("getListFormDiv").remove();
+
+            document.getElementById("showPresentsDiv").style.display = 'block';
+
+            if (data) {
+              var par = document.createElement('p');
+              par.textContent  = "Krāsa: " + data.color;
+              document.getElementById("winnerPresentListDiv").appendChild(par);
+
+              var par = document.createElement('p');
+              par.textContent  = "Garša: " + data.taste;
+              document.getElementById("winnerPresentListDiv").appendChild(par);
+
+              data.presents.forEach(myFunction);
+            }
+
+          } catch (error) {
+            console.error(error);
+            // expected output: ReferenceError: nonExistentFunction is not defined
+            // Note - error messages will vary depending on browser
+
             var par = document.createElement('p');
-            par.textContent  = "Dāvana" + (index + 1) + ": " + value;
+            par.textContent  = "ĶĻŪDA: " + error;
             document.getElementById("winnerPresentListDiv").appendChild(par);
-          }
-
-          document.getElementById("getListFormDiv").remove();
-
-          document.getElementById("showPresentsDiv").style.display = 'block';
-
-          if (data) {
-            var par = document.createElement('p');
-            par.textContent  = "Krāsa: " + data.color;
-            document.getElementById("winnerPresentListDiv").appendChild(par);
-
-            var par = document.createElement('p');
-            par.textContent  = "Garša: " + data.taste;
-            document.getElementById("winnerPresentListDiv").appendChild(par);
-
-            data.presents.forEach(myFunction);
           }
         }
 
