@@ -120,7 +120,7 @@ body {
             </div>
           </div>
 
-          <div class="d-grid gap-2">
+          <div id="savePresentsDiv" class="d-grid gap-2">
             <button type="button" class="btn btn-primary my-3" id="savePresentsBtn">Saglabāt</button>
           </div>
         </div>
@@ -303,12 +303,22 @@ body {
 
         // Convert the collection into an array and loop over the array
         Array.prototype.slice.call(areas).forEach(function(area){
-          userPresents.push(area.value);
+          if (area.value && area.value.length > 0)
+            userPresents.push(area.value);
         });
 
         if (!currentUserId)
         {
           console.log("Cannot find user ID :(");
+          return;
+        }
+
+        if (userPresents.length < 3) {
+          var par = document.createElement('p');
+          par.className = "text-red";
+          par.textContent  = "Vajag vismaz 3 dāvanas! Padomā vēl!";
+          document.getElementById("savePresentsDiv").appendChild(par);
+
           return;
         }
 
@@ -477,6 +487,7 @@ body {
             // Note - error messages will vary depending on browser
 
             var par = document.createElement('p');
+            par.className = "text-red";
             par.textContent  = "ĶĻŪDA: " + error;
             document.getElementById("winnerPresentListDiv").appendChild(par);
           }
