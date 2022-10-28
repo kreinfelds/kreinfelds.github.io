@@ -200,6 +200,13 @@ body {
 
         var nameValue = document.getElementById("nameInput").value;
 
+        if (nameValue.length < 1) {
+          var par = document.createElement('p');
+          par.className = "fs-3 text-danger fw-bold";
+          par.textContent  = "ĶĻŪDA: Ievadiet vārdu!";
+          document.getElementById("loginFormDiv").appendChild(par);
+          return;
+        }
         //find or create new
 
         let users = db.collection("users");
