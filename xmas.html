@@ -143,10 +143,16 @@ body {
 
         <div id="waitFormDiv" class="hidden text-white">
           <h1>Tavas dāvanas ir saglabātas, gaidām citus</h1>
+
+          <h1>Tavs PIN kods, kuru izmantot dāvanu izlozē.</h1>
+          <p class="pinValue"></p>
         </div>
 
         <div id="getListFormDiv" class="hidden text-white">
           <h1>Visi dalībnieki ir gatavi, varam sākti izlozi :)</h1>
+
+          <h1>Tavs PIN kods, kuru izmantot dāvanu izlozē.</h1>
+          <p class="oldPinValue"></p>
 
           <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
@@ -216,7 +222,7 @@ body {
 
       document.getElementById("newUserBtn").addEventListener("click", function (event) {
           event.preventDefault();
-          showNewUser();
+          createPresentForm();
       })
 
       document.getElementById("lotteryBtn").addEventListener("click", function (event) {
@@ -225,8 +231,8 @@ body {
       })
 
       function showNewUser() {
-        document.getElementById("newFormDiv").remove();
-        document.getElementById("loginFormDiv").style.display = 'block';
+        //document.getElementById("newFormDiv").remove();
+        //document.getElementById("loginFormDiv").style.display = 'block';
       }
 
       function showLottery() {
@@ -246,7 +252,6 @@ body {
           return;
         }
         //find or create new
-
         let users = db.collection("users");
         let queryParam = "name";
         let query = users.where(queryParam, "==", nameValue.toLowerCase());
@@ -385,26 +390,47 @@ body {
           return;
         }
 
-        var docRef = db
-          .collection('users')
-          .doc(currentUserId);
+        //TODO: generate pin
 
-        if (docRef) {
-          docRef.set({
-            color: yourColor,
-            taste: yourTaste,
-                presents: userPresents
-              }, { merge: true }).
-              then(() => {
-                  console.log("Document successfully written!");
+        let newPin = 0;
 
-                  //TODO: Switch to wait windows (if wait)
-                  document.getElementById("presentsFormDiv").remove();
-                  showWaitForm();
-              })
-              .catch((error) => {
-                  console.error("Error writing document: ", error);
-              });
+        do {
+          newPin = generateNewPin();
+          console.log("newPin = " + newPin);
+        } while (!newPin);
+
+
+        db.collection("users").add({
+          pinCode: newPin,
+          color: yourColor,
+          taste: yourTaste,
+          presents: userPresents
+        }).then(() => {
+          console.log("Document successfully written!");
+
+          document.getElementById("presentsFormDiv").remove();
+          showWaitForm(newPin);
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+
+      }
+
+      function generateNewPin() {
+        var yourPin = Math.floor(Math.random()*(999-100+1)+100);
+
+        let users = db.collection("users");
+        let queryParam = "pinCode";
+        let query = users.where(queryParam, "==", yourPin);
+
+
+        var docs = await query.get();
+
+        if (docs.empty) {
+          return yourPin;
+        } else {
+          return false;
         }
       }
 
@@ -429,11 +455,19 @@ body {
         input.focus();
       }
 
-      function showWaitForm() {
-        if (wait)
+      function showWaitForm(yourPin) {
+        //document.getElementById("pinValue").textContent = yourPin;
+
+        //oldPinValue
+
+        if (wait) {
           document.getElementById("waitFormDiv").style.display = 'block';
-        else
+          document.getElementById("pinValue").textContent = yourPin;
+        }
+        else {
           document.getElementById("getListFormDiv").style.display = 'block';
+          document.getElementById("oldPinValue").textContent = yourPin;
+        }
       }
 
       function getPresentList() {
