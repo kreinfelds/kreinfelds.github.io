@@ -461,11 +461,11 @@ body {
 
             if (data) {
               var par = document.createElement('p');
-              par.textContent  = "Krāsa: " + data.color;
+              par.textContent  = "Krāsa: " + data.color ? data.color : "Nav norādīts :(";
               document.getElementById("winnerPresentListDiv").appendChild(par);
 
               var par = document.createElement('p');
-              par.textContent  = "Garša: " + data.taste;
+              par.textContent  = "Garša: " + data.taste ? data.taste : "Nav norādīts :(";
               document.getElementById("winnerPresentListDiv").appendChild(par);
 
               data.presents.forEach(myFunction);
