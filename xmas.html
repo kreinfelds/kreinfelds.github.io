@@ -88,7 +88,7 @@ body {
             <h2>Ievadiet savu PIN</h2>
           </div>
           <div class="">
-            <input type="text" id="nameInput" placeholder="pin kods">
+            <input type="text" id="nameInput" placeholder="PIN">
           </div>
           <div class="">
             <button type="button" class="btn btn-primary btn-lg" id="loginUserBtn">Ienākt</button>
@@ -143,15 +143,19 @@ body {
         <div id="waitFormDiv" class="hidden text-white">
           <h1>Tavas dāvanas ir saglabātas, gaidām citus</h1>
 
-          <h1>Tavs PIN kods, kuru izmantot dāvanu izlozē.</h1>
-          <p id="pinValue"></p>
+          <div id="pinDiv" class="hidden">
+            <h3>Tavs PIN kods, kuru izmantot dāvanu izlozē:</h3>
+            <h2 id="pinValue"></h2>
+          </div>
         </div>
 
         <div id="getListFormDiv" class="hidden text-white">
           <h1>Visi dalībnieki ir gatavi, varam sākti izlozi :)</h1>
 
-          <h1>Tavs PIN kods, kuru izmantot dāvanu izlozē.</h1>
-          <p id="oldPinValue"></p>
+          <div id="oldPinDiv" class="hidden">
+            <h3>Tavs PIN kods, kuru izmantot dāvanu izlozē:</h3>
+            <h2 id="oldPinValue"></h2>
+          </div>
 
           <button type="button" class="btn btn-primary" id="getPresentListBtn">Izlozēt dāvanu sarakstu</button>
         </div>
@@ -540,13 +544,19 @@ body {
 
         if (wait) {
           document.getElementById("waitFormDiv").style.display = 'block';
-          if (yourPin)
-          document.getElementById("pinValue").textContent = yourPin;
+          if (yourPin) {
+            //pinDiv
+            document.getElementById("pinDiv").style.display = 'block';
+            document.getElementById("pinValue").textContent = yourPin;
+          }
         }
         else {
           document.getElementById("getListFormDiv").style.display = 'block';
-          if (yourPin)
-          document.getElementById("oldPinValue").textContent = yourPin;
+          if (yourPin) {
+            //pinDiv
+            document.getElementById("oldPinVDiv").style.display = 'block';
+            document.getElementById("oldPinValue").textContent = yourPin;
+          }
         }
       }
 
