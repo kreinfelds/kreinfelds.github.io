@@ -169,7 +169,7 @@ body {
         </div>
 
         <div id="showPresentsDiv" class="hidden">
-          <p>Šim sarakstam varēsi piekļūt vienmēr ar savu PIN kodu vai arī vienkārši nofotogrāfē to ;)</p>
+          <h3 class="text-white">Šim sarakstam varēsi piekļūt vienmēr ar savu PIN kodu vai arī vienkārši nofotogrāfē to ;)</h3>
           <div id="winnerPresentListDiv" class="tran">
           </div>
         </div>
@@ -692,11 +692,30 @@ body {
 
           if (data) {
             var par1 = document.createElement('p');
-            par1.textContent  = "Centies iesaiņot, noformēt dāvanu šādā krāsā: " + (data.color ? data.color : "Nav norādīts :(");
+            par1.textContent  = "Centies iesaiņot, noformēt dāvanu šādā krāsā: ";
+
+            var colorSpan = document.createElement('span');
+            colorSpan.classList.add("fw-bold");
+            colorSpan.textContent = data.color ? data.color : "Nav norādīts :(";
+
+            par1.appendChild(colorSpan);
+
             document.getElementById("winnerPresentListDiv").appendChild(par1);
 
+            /*var colorSpan = document.createElement('span');
+            colorSpan.classList.add("fw-bold");
+            colorSpan.textContent = data.color ? data.color : "Nav norādīts :(";
+            document.getElementById("winnerPresentListDiv").appendChild(colorSpan);*/
+
             var par2 = document.createElement('p');
-            par2.textContent  = "Atrodi un pievieno kaut ko ar šādu garšu: " + (data.taste ? data.taste : "Nav norādīts :(");
+            par2.textContent  = "Atrodi un pievieno kaut ko ar šādu garšu: ";
+
+            var tasteSpan = document.createElement('span');
+            tasteSpan.classList.add("fw-bold");
+            tasteSpan.textContent = data.taste ? data.taste : "Nav norādīts :(";
+
+            par2.appendChild(tasteSpan);
+
             document.getElementById("winnerPresentListDiv").appendChild(par2);
 
             data.presents.forEach(myFunction);
