@@ -1,0 +1,179 @@
+---
+permalink: /todo/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klāvs's Productivity Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr.current {
+      background-color: #dff0d8;
+      font-weight: bold;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Klāvs's Productivity Dashboard</h1>
+
+  <!-- Monthly Goals Section -->
+  <div class="section">
+    <h2>Monthly Goals</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Goals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Business</td>
+          <td>Launch new AD Permissions Auditor features</td>
+        </tr>
+        <tr>
+          <td>Marketing</td>
+          <td>Increase trial sign-ups by 10%</td>
+        </tr>
+        <tr>
+          <td>Personal</td>
+          <td>Complete 20 workouts</td>
+        </tr>
+        <tr>
+          <td>Household</td>
+          <td>Maintain heating system consistently</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Weekly Milestones Section -->
+  <div class="section">
+    <h2>Weekly Milestones</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Focus Tasks</th>
+          <th>Progress Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>_________________________________</td><td>_________________________________</td></tr>
+        <tr><td>2</td><td>_________________________________</td><td>_________________________________</td></tr>
+        <tr><td>3</td><td>_________________________________</td><td>_________________________________</td></tr>
+        <tr><td>4</td><td>_________________________________</td><td>_________________________________</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Daily Schedule Section -->
+  <div class="section">
+    <h2>Daily Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Task</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>07:00 - 08:30</td><td>Morning Routine (Kids & Breakfast)</td></tr>
+        <tr><td>09:00 - 09:45</td><td>Emails & Follow-Ups</td></tr>
+        <tr><td>09:45 - 10:15</td><td>Workout</td></tr>
+        <tr><td>10:30 - 12:00</td><td>Development / Bug Fixing</td></tr>
+        <tr><td>12:30 - 15:00</td><td>Marketing & Manuals</td></tr>
+        <tr><td>15:00 - 15:15</td><td>Bring Wood for Heating</td></tr>
+        <tr><td>22:00 - 24:00</td><td>Personal/Work or Relaxation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Daily Checklist Section -->
+  <div class="section">
+    <h2>Daily Checklist</h2>
+    <ul class="checklist">
+      <li><input type="checkbox"> Morning Routine</li>
+      <li><input type="checkbox"> Emails & Follow-Ups</li>
+      <li><input type="checkbox"> Workout</li>
+      <li><input type="checkbox"> Development Task</li>
+      <li><input type="checkbox"> Marketing Task</li>
+      <li><input type="checkbox"> Household Task</li>
+      <li><input type="checkbox"> Reflection (What went well? What can improve?)</li>
+    </ul>
+  </div>
+
+  <script>
+    function highlightCurrentTask() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+
+      const timeSlots = [
+        { start: { h: 7, m: 0 }, end: { h: 8, m: 30 }, task: "Morning Routine" },
+        { start: { h: 9, m: 0 }, end: { h: 9, m: 45 }, task: "Emails & Follow-Ups" },
+        { start: { h: 9, m: 45 }, end: { h: 10, m: 15 }, task: "Workout" },
+        { start: { h: 10, m: 30 }, end: { h: 12, m: 0 }, task: "Development" },
+        { start: { h: 12, m: 30 }, end: { h: 15, m: 0 }, task: "Marketing" },
+        { start: { h: 15, m: 0 }, end: { h: 15, m: 15 }, task: "Bring Wood" },
+        { start: { h: 22, m: 0 }, end: { h: 24, m: 0 }, task: "Personal Time" }
+      ];
+
+      const rows = document.querySelectorAll('tbody tr');
+      rows.forEach(row => row.classList.remove('current'));
+
+      timeSlots.forEach((slot, index) => {
+        const startTime = slot.start.h * 60 + slot.start.m;
+        const endTime = slot.end.h * 60 + slot.end.m;
+        const currentTime = currentHour * 60 + currentMinute;
+
+        if (currentTime >= startTime && currentTime < endTime) {
+          rows[index].classList.add('current');
+        }
+      });
+    }
+
+    setInterval(highlightCurrentTask, 60000); // Update every minute
+    highlightCurrentTask(); // Initial call
+  </script>
+</body>
+</html>
