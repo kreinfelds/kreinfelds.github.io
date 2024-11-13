@@ -117,13 +117,13 @@ permalink: /todo/
         </tr>
       </thead>
       <tbody>
-        <tr><td>07:00 - 08:30</td><td>Morning Routine (Kids & Breakfast)</td></tr>
-        <tr><td>09:00 - 09:45</td><td>Emails & Follow-Ups</td></tr>
-        <tr><td>09:45 - 10:15</td><td>Workout</td></tr>
-        <tr><td>10:30 - 12:00</td><td>Development / Bug Fixing</td></tr>
-        <tr><td>12:30 - 15:00</td><td>Marketing & Manuals</td></tr>
-        <tr><td>15:00 - 15:15</td><td>Bring Wood for Heating</td></tr>
-        <tr><td>22:00 - 24:00</td><td>Personal/Work or Relaxation</td></tr>
+        <tr data-time="07:00-08:30"><td>07:00 - 08:30</td><td>Morning Routine (Kids & Breakfast)</td></tr>
+        <tr data-time="09:00-09:45"><td>09:00 - 09:45</td><td>Emails & Follow-Ups</td></tr>
+        <tr data-time="09:45-10:15"><td>09:45 - 10:15</td><td>Workout</td></tr>
+        <tr data-time="10:30-12:00"><td>10:30 - 12:00</td><td>Development / Bug Fixing</td></tr>
+        <tr data-time="12:30-15:00"><td>12:30 - 15:00</td><td>Marketing & Manuals</td></tr>
+        <tr data-time="15:00-15:15"><td>15:00 - 15:15</td><td>Bring Wood for Heating</td></tr>
+        <tr data-time="22:00-24:00"><td>22:00 - 24:00</td><td>Personal/Work or Relaxation</td></tr>
       </tbody>
     </table>
   </div>
@@ -145,29 +145,21 @@ permalink: /todo/
   <script>
     function highlightCurrentTask() {
       const now = new Date();
-      const currentHour = now.getHours();
-      const currentMinute = now.getMinutes();
-
-      const timeSlots = [
-        { start: { h: 7, m: 0 }, end: { h: 8, m: 30 }, task: "Morning Routine" },
-        { start: { h: 9, m: 0 }, end: { h: 9, m: 45 }, task: "Emails & Follow-Ups" },
-        { start: { h: 9, m: 45 }, end: { h: 10, m: 15 }, task: "Workout" },
-        { start: { h: 10, m: 30 }, end: { h: 12, m: 0 }, task: "Development" },
-        { start: { h: 12, m: 30 }, end: { h: 15, m: 0 }, task: "Marketing" },
-        { start: { h: 15, m: 0 }, end: { h: 15, m: 15 }, task: "Bring Wood" },
-        { start: { h: 22, m: 0 }, end: { h: 24, m: 0 }, task: "Personal Time" }
-      ];
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
       const rows = document.querySelectorAll('tbody tr');
-      rows.forEach(row => row.classList.remove('current'));
+      rows.forEach(row => {
+        const [start, end] = row.dataset.time.split('-');
+        const [startH, startM] = start.split(':').map(Number);
+        const [endH, endM] = end.split(':').map(Number);
 
-      timeSlots.forEach((slot, index) => {
-        const startTime = slot.start.h * 60 + slot.start.m;
-        const endTime = slot.end.h * 60 + slot.end.m;
-        const currentTime = currentHour * 60 + currentMinute;
+        const startTime = startH * 60 + startM;
+        const endTime = endH * 60 + endM;
 
-        if (currentTime >= startTime && currentTime < endTime) {
-          rows[index].classList.add('current');
+        if (currentMinutes >= startTime && currentMinutes < endTime) {
+          row.classList.add('current');
+        } else {
+          row.classList.remove('current');
         }
       });
     }
