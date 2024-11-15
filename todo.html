@@ -7,165 +7,170 @@ permalink: /todo/
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klāvs's Productivity Dashboard</title>
+  <title>Daily Plan</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #333;
       line-height: 1.6;
     }
     h1, h2 {
       text-align: center;
-      color: #333;
+      color: #007bff;
     }
-    h2 {
-      margin-top: 30px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    tr.current {
-      background-color: #dff0d8;
-      font-weight: bold;
+    h3 {
+      color: #555;
     }
     .section {
-      margin-bottom: 30px;
-      padding: 20px;
+      margin-bottom: 20px;
+      padding: 15px;
       background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .checklist {
-      list-style: none;
-      padding: 0;
+    .section h3 {
+      margin-top: 0;
     }
-    .checklist li {
-      margin: 5px 0;
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    .focus-strategy {
+      margin-top: 10px;
+      padding: 10px;
+      background: #e9f7ef;
+      border-left: 5px solid #28a745;
+      border-radius: 4px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Klāvs's Productivity Dashboard</h1>
 
-  <!-- Monthly Goals Section -->
-  <div class="section">
-    <h2>Monthly Goals</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Goals</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Business</td>
-          <td>Launch new AD Permissions Auditor features</td>
-        </tr>
-        <tr>
-          <td>Marketing</td>
-          <td>Increase trial sign-ups by 10%</td>
-        </tr>
-        <tr>
-          <td>Personal</td>
-          <td>Complete 20 workouts</td>
-        </tr>
-        <tr>
-          <td>Household</td>
-          <td>Maintain heating system consistently</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <h1>Daily Plan with Focus Strategies</h1>
 
-  <!-- Weekly Milestones Section -->
   <div class="section">
-    <h2>Weekly Milestones</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Week</th>
-          <th>Focus Tasks</th>
-          <th>Progress Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>_________________________________</td><td>_________________________________</td></tr>
-        <tr><td>2</td><td>_________________________________</td><td>_________________________________</td></tr>
-        <tr><td>3</td><td>_________________________________</td><td>_________________________________</td></tr>
-        <tr><td>4</td><td>_________________________________</td><td>_________________________________</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Daily Schedule Section -->
-  <div class="section">
-    <h2>Daily Schedule</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Task</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr data-time="07:00-08:30"><td>07:00 - 08:30</td><td>Morning Routine (Kids & Breakfast)</td></tr>
-        <tr data-time="09:00-09:45"><td>09:00 - 09:45</td><td>Emails & Follow-Ups</td></tr>
-        <tr data-time="09:45-10:15"><td>09:45 - 10:15</td><td>Workout</td></tr>
-        <tr data-time="10:30-12:00"><td>10:30 - 12:00</td><td>Development / Bug Fixing</td></tr>
-        <tr data-time="12:30-15:00"><td>12:30 - 15:00</td><td>Marketing & Manuals</td></tr>
-        <tr data-time="15:00-15:15"><td>15:00 - 15:15</td><td>Bring Wood for Heating</td></tr>
-        <tr data-time="22:00-24:00"><td>22:00 - 24:00</td><td>Personal/Work or Relaxation</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Daily Checklist Section -->
-  <div class="section">
-    <h2>Daily Checklist</h2>
-    <ul class="checklist">
-      <li><input type="checkbox"> Morning Routine</li>
-      <li><input type="checkbox"> Emails & Follow-Ups</li>
-      <li><input type="checkbox"> Workout</li>
-      <li><input type="checkbox"> Development Task</li>
-      <li><input type="checkbox"> Marketing Task</li>
-      <li><input type="checkbox"> Household Task</li>
-      <li><input type="checkbox"> Reflection (What went well? What can improve?)</li>
+    <h2>Morning Routine (7:00 - 9:00)</h2>
+    <ul>
+      <li>07:00: Wake up with 1-year-old and handle morning duties.</li>
+      <li>07:30: Wake 5-year-old and help get him ready for kindergarten.</li>
+      <li>08:00: Drop 5-year-old at kindergarten.</li>
+      <li>08:30: Breakfast and quality time with wife and 1-year-old.</li>
     </ul>
   </div>
 
-  <script>
-    function highlightCurrentTask() {
-      const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  <div class="section">
+    <h2>Work Block 1: Emails & Customer Follow-ups (9:00 - 9:45)</h2>
+    <ul>
+      <li>Batch Emails & Follow-ups:</li>
+      <ul>
+        <li>Check customer emails.</li>
+        <li>Categorize tasks in Trello.</li>
+      </ul>
+      <li>Quick Wins:</li>
+      <ul>
+        <li>Resolve simple issues within this time block.</li>
+      </ul>
+    </ul>
+    <div class="focus-strategy">
+      <strong>Focus Strategy:</strong> Use the <strong>Pomodoro Technique</strong> (25 mins work, 5 mins break).
+    </div>
+  </div>
 
-      const rows = document.querySelectorAll('tbody tr');
-      rows.forEach(row => {
-        const [start, end] = row.dataset.time.split('-');
-        const [startH, startM] = start.split(':').map(Number);
-        const [endH, endM] = end.split(':').map(Number);
+  <div class="section">
+    <h2>Workout (9:45 - 10:15)</h2>
+    <p>30-minute workout to boost energy.</p>
+  </div>
 
-        const startTime = startH * 60 + startM;
-        const endTime = endH * 60 + endM;
+  <div class="section">
+    <h2>Work Block 2: Development & Bug Fixing (10:30 - 12:00)</h2>
+    <ul>
+      <li>AD Permissions Auditor Development:</li>
+      <ul>
+        <li>Focus on coding or feature development.</li>
+      </ul>
+      <li>Bug Investigation:</li>
+      <ul>
+        <li>Allocate focused time for complex issues.</li>
+      </ul>
+    </ul>
+    <div class="focus-strategy">
+      <strong>Focus Strategy:</strong> Deep Work — No social media or interruptions. Use a <strong>transition ritual</strong> (e.g., quick walk or stretching) before starting.
+    </div>
+  </div>
 
-        if (currentMinutes >= startTime && currentMinutes < endTime) {
-          row.classList.add('current');
-        } else {
-          row.classList.remove('current');
-        }
-      });
-    }
+  <div class="section">
+    <h2>Lunch Break (12:00 - 12:30)</h2>
+    <p>Eat and recharge.</p>
+  </div>
 
-    setInterval(highlightCurrentTask, 60000); // Update every minute
-    highlightCurrentTask(); // Initial call
-  </script>
+  <div class="section">
+    <h2>Work Block 3: Marketing & Content Creation (12:30 - 15:00)</h2>
+    <ul>
+      <li>Manual Updates:</li>
+      <ul>
+        <li>Work on product manuals and customer tips.</li>
+      </ul>
+      <li>Sysadmin Directory:</li>
+      <ul>
+        <li>Add tools and optimize for SEO.</li>
+      </ul>
+      <li>Google Ads & Campaigns:</li>
+      <ul>
+        <li>Review and optimize marketing performance.</li>
+      </ul>
+    </ul>
+    <div class="focus-strategy">
+      <strong>Focus Strategy:</strong> Schedule <strong>social media time</strong> (5-10 mins break at 14:00).
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Household Task (15:00 - 15:15)</h2>
+    <p>Bring wood for heating.</p>
+  </div>
+
+  <div class="section">
+    <h2>Work Block 4: Product Focus or Bug Fixing (15:15 - 16:00)</h2>
+    <p>Continue development or address high-priority bugs.</p>
+  </div>
+
+  <div class="section">
+    <h2>Family Time & Evening Routine (16:00 - 22:00)</h2>
+    <ul>
+      <li>16:00: Wife picks up 5-year-old.</li>
+      <li>18:00: BMX training with 5-year-old.</li>
+      <li>19:15: Dinner.</li>
+      <li>20:00: Bath 5-year-old.</li>
+      <li>20:30-22:00: Bedtime routine with 5-year-old.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Personal/Work Time (22:00 - 24:00/01:00)</h2>
+    <ul>
+      <li>Work (if necessary): Address pending tasks or emails.</li>
+      <li>Relax: Watch TV with wife or unwind.</li>
+      <li>Social Media: Use this time for casual browsing without guilt.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>End-of-Day Reflection (5 mins)</h2>
+    <ul>
+      <li>What went well?</li>
+      <li>What can improve?</li>
+    </ul>
+  </div>
+
 </body>
 </html>
